@@ -16,7 +16,7 @@ const Layout = ({ children, className }: LayoutProps) => {
       <header className="border-b bg-white dark:bg-gray-900">
         <div className="container py-4">
           <h1 className="text-2xl font-bold text-center">
-            File Command Nexus
+            TTS Demo
           </h1>
         </div>
       </header>
@@ -28,7 +28,7 @@ const Layout = ({ children, className }: LayoutProps) => {
       <footer className="border-t py-4 bg-white dark:bg-gray-900">
         <div className="container">
           <p className="text-center text-sm text-muted-foreground">
-            Built with React + Python. Upload files and run commands.
+             &copy; 2025 Praveen & Kalai. All rights reserved.
           </p>
         </div>
       </footer>
