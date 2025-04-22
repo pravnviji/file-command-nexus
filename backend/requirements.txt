@@ -1,3 +1,7 @@
-
-Flask==2.2.3
-Flask-CORS==3.0.10
+click==8.1.8
+Flask==2.2.5
+flask-cors==5.0.1
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+Werkzeug==2.2.3
