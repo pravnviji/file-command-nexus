@@ -62,7 +62,6 @@ const FileUpload = ({ onFileUploaded, isUploading, setIsUploading }: FileUploadP
       });
       
       const data = await response.json();
-      
       if (response.ok) {
         toast({
           title: "File Uploaded",
