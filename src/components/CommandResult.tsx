@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Check, X } from "lucide-react";
@@ -17,6 +16,25 @@ interface CommandResultProps {
 }
 
 const CommandResult = ({ results }: CommandResultProps) => {
+  const [audioUrl, setAudioUrl] = useState('');
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    debugger;
+    if (results.length > 0) {
+      debugger;
+      const textToSpeak = 'Successfully integrated the voice assitant';
+      debugger;
+      if (textToSpeak) {
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.voice = speechSynthesis
+          .getVoices()
+          .find((v) => v.name.toLowerCase().includes('bella')) || null; // optional: filter for voice
+        speechSynthesis.speak(utterance);
+      }
+    }
+  }, [results]);
+
   if (results.length === 0) {
     return (
       <Card>
@@ -38,8 +56,8 @@ const CommandResult = ({ results }: CommandResultProps) => {
       <CardContent className="p-0">
         <ScrollArea className="h-[400px]">
           {results.map((item, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`p-4 border-b ${index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-800/50' : ''}`}
             >
               <div className="flex items-center gap-2 mb-2">
@@ -50,7 +68,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                 )}
                 <p className="font-bold font-mono text-sm">{item.command}</p>
               </div>
-              
+
               {item.result.stdout && (
                 <div className="mb-2">
                   <p className="text-xs font-bold text-muted-foreground mb-1">STDOUT:</p>
@@ -59,7 +77,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                   </pre>
                 </div>
               )}
-              
+
               {item.result.stderr && (
                 <div>
                   <p className="text-xs font-bold text-red-500 mb-1">STDERR:</p>
@@ -68,7 +86,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                   </pre>
                 </div>
               )}
-              
+
               <p className="text-xs text-muted-foreground mt-2">
                 {new Date(item.timestamp).toLocaleString()}
               </p>
