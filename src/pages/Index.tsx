@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from "@/components/Layout";
 import FileUpload from "@/components/FileUpload";
 import CommandInput from "@/components/CommandInput";
@@ -12,6 +12,8 @@ const Index = () => {
   const [results, setResults] = useState<Array<any>>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [isExecuting, setIsExecuting] = useState(false);
+
+
 
   const handleFileUploaded = (newSessionId: string, newFileName: string) => {
     setSessionId(newSessionId);
