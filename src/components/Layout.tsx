@@ -28,7 +28,7 @@ const Layout = ({ children, className }: LayoutProps) => {
       <footer className="border-t py-4 bg-white dark:bg-gray-900">
         <div className="container">
           <p className="text-center text-sm text-muted-foreground">
-             &copy; 2025 Praveen & Kalai. All rights reserved.
+            &copy; 2025 Praveen. All rights reserved.
           </p>
         </div>
       </footer>
