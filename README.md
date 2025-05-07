@@ -47,6 +47,11 @@ A full-stack application that allows you to upload files and execute commands on
    python app.py
    ```
 
+4. For swagger api docs generation:
+   ```
+    http://localhost:5000/apidocs/
+   ```
+
 The backend server will start on http://localhost:5000.
 
 ### Frontend Setup
@@ -77,7 +82,7 @@ This application is intended for demonstration purposes and should not be used i
 - Input validation and sanitization
 - Authentication and authorization
 - Rate limiting
-- Secure file handling
+- Secure file handlings
 - Command restrictions
 
 ## License
