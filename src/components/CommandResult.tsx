@@ -98,7 +98,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                 className="gap-2 mr-2"
               >
                 <PlayCircle size={16} />
-                Resume Audio
+                Repeat
               </Button>
               <Button
                 variant="outline"
@@ -111,7 +111,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                 className="gap-2"
               >
                 <StopCircle size={16} />
-                Stop Audio
+                Stop
               </Button>
             </div>
               <p className="text-xs text-muted-foreground mt-2">
