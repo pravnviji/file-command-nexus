@@ -28,6 +28,7 @@ OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
 if not OPENROUTER_API_KEY:
     raise EnvironmentError("OPENROUTER_API_KEY not set in environment")
 openai.api_base = "https://openrouter.ai/api/v1"
+openai.api_key = OPENROUTER_API_KEY
 
 # Temp file directory
 UPLOAD_FOLDER = os.path.join(tempfile.gettempdir(), 'file_command_nexus')

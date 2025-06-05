@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Check, X } from "lucide-react";
+import { Check, PlayCircle, StopCircle, X } from "lucide-react";
+import { Button } from './ui/button';
 
 interface CommandResultProps {
   results: Array<{
-    command: string;
+    question: string;
     result: {
       stdout: string;
       stderr: string;
@@ -18,15 +19,14 @@ interface CommandResultProps {
 const CommandResult = ({ results }: CommandResultProps) => {
   const [audioUrl, setAudioUrl] = useState('');
   const audioRef = useRef(null);
+  let utterance = null;
 
   useEffect(() => {
-    debugger;
     if (results.length > 0) {
-      debugger;
-      const textToSpeak = 'Successfully integrated the voice assitant';
-      debugger;
+
+      const textToSpeak = results[0]?.result.stdout;
       if (textToSpeak) {
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.voice = speechSynthesis
           .getVoices()
           .find((v) => v.name.toLowerCase().includes('bella')) || null; // optional: filter for voice
@@ -66,7 +66,7 @@ const CommandResult = ({ results }: CommandResultProps) => {
                 ) : (
                   <X size={16} className="text-red-500" />
                 )}
-                <p className="font-bold font-mono text-sm">{item.command}</p>
+                <p className="font-bold font-mono text-sm">{item.question}</p>
               </div>
 
               {item.result.stdout && (
@@ -86,10 +86,38 @@ const CommandResult = ({ results }: CommandResultProps) => {
                   </pre>
                 </div>
               )}
-
+          <div className="flex justify-end mt-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  if (utterance) {
+                    speechSynthesis.speak(utterance);
+                  }
+                }}
+                className="gap-2 mr-2"
+              >
+                <PlayCircle size={16} />
+                Resume Audio
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  if (utterance) {
+                    speechSynthesis.cancel();
+                  }
+                }}
+                className="gap-2"
+              >
+                <StopCircle size={16} />
+                Stop Audio
+              </Button>
+            </div>
               <p className="text-xs text-muted-foreground mt-2">
                 {new Date(item.timestamp).toLocaleString()}
               </p>
+        
             </div>
           ))}
         </ScrollArea>

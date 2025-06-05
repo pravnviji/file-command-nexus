@@ -50,26 +50,37 @@ const CommandInput = ({
     setIsExecuting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/execute', {
+      const response = await fetch('http://localhost:5000/api/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          command: command.trim(),
+          question: command.trim(),
           session_id: sessionId,
         }),
       });
-
       const data = await response.json();
-
-      if (response.ok) {
+      if (response.ok && data.answer) {
         onCommandExecuted({
-          command,
-          result: data,
+          question: command,
+          result: {
+            stdout: data.answer,
+            stderr: '',
+            returncode: 0,
+          },
           timestamp: new Date().toISOString()
         });
       } else {
+        onCommandExecuted({
+          question: command,
+          result: {
+            stdout: '',
+            stderr: data.error,
+            returncode: 0,
+          },
+          timestamp: new Date().toISOString()
+        });
         toast({
           variant: "destructive",
           title: "Execution Failed",
